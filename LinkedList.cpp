@@ -2,7 +2,6 @@
 // array all element in series in memory e1 -> e2 -> e3
 // linked list  all element not in series in memory e1 ------> e2 ---> e3 -> e4  <---e5
 // in linked list its easy to insert first element 
-
 #include <algorithm>
 #include <iostream>
 using namespace std;
@@ -12,10 +11,16 @@ using namespace std;
 class Node {
 private:
 	int data;
+	int power;
 	Node* next;
 public:
-	Node(int data) {
+	Node(int data , int power) {
 		this->data = data;
+		this->power = power;
+		this->next = nullptr;
+	}Node(int data) {
+		this->data = data;
+		this->power = 0;
 		this->next = nullptr;
 	}
 	int GetData() {
@@ -115,6 +120,31 @@ public:
 		}
 		
 	}
+	// with power
+	void PushBackWithPower(int d , int p) {
+		Node* n = new Node(d,p);
+		if (this->Head == nullptr) {
+			this->Head = n;
+
+		}
+		else
+		{
+			Node* CurNode = Head;
+
+			while (CurNode->GetNext() != nullptr)
+			{
+				CurNode = CurNode->GetNext();
+			}
+			CurNode->SetNext(n);
+
+
+
+
+
+		}
+
+	}
+
 	void PopBack() {
 		if (this->embty()) {
 			return;
@@ -153,6 +183,59 @@ public:
 		}
 
 		return FirstElement->GetData();
+	}	
+	void SetIndex(int index,int data) {
+		if (index < 0 || index >= length()) {
+			cout << "Index out of bounds." << endl;
+			  // or throw an exception, depending on your design choice
+		}
+
+		Node* FirstElement = Head;
+		for (int i = 0; i < index; i++) {
+			FirstElement = FirstElement->GetNext();
+		}
+
+		 FirstElement->SetData(data);
+	}
+	void pop(int index) {
+		if (index < 0 || index >= length()) {
+			cout << "Index out of bounds." << endl;
+			  // or throw an exception, depending on your design choice
+		}
+
+		Node* PrePopElement = nullptr;
+		Node* FirstElement = Head;
+		for (int i = 0; i < index; i++) {
+			PrePopElement = FirstElement;
+			FirstElement = FirstElement->GetNext();
+		
+			
+		}
+		PrePopElement->SetNext(FirstElement->GetNext());
+		delete FirstElement;
+
+		
+	}
+	void SelectionSort() {
+		LinkedList * SortedLinkedList = new LinkedList;
+		int length = this->length();
+		for (int i = 0; i < length; i++) {
+			int min = this->GetIndex(i);
+			int popindex = this->GetIndex(i);
+			for (int j = i+1; j < length; j++) {
+				if (this->GetIndex(j) < this->GetIndex(i)) {
+					int temp_data = this->GetIndex(i);
+					this->SetIndex(i, this->GetIndex(j)) ;
+					this->SetIndex(j, temp_data) ;
+				}
+			}
+
+		}
+	}
+	void InitializeFromArr(int arr [], int length) {
+		for (int i = 0; i < length; i++) {
+			this->PushBackWithPower(arr[i], length - (i + 1));
+		}
 	}
 
 	~LinkedList()
@@ -165,21 +248,17 @@ public:
 
 int main()
 
-{
+{	
+	int arr[4] = { 4,2,0,-1 };
 	LinkedList * L1 = new LinkedList;
-	cout << L1->length()<<endl;
-	L1->push(5);
-	L1->push(6);
-	L1->push(4);
-	L1->PushBack(7);
-	cout << L1->length()<<endl;
-	cout << L1->GetIndex(3)<<endl;
-	cout << L1->GetIndex(2)<<endl;
-	L1->PopBack();
-	cout << L1->GetIndex(3)<<endl;
-	cout << L1->length()<<endl;
-	cout << L1->embty() << endl;
-	delete L1;
+	L1->InitializeFromArr(arr, 4);
+	cout<<L1->GetIndex(0);
+	cout<<L1->GetIndex(1);
+	cout<<L1->GetIndex(2);
+	cout<<L1->GetIndex(3);
+	
+
+
 
 
 
