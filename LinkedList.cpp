@@ -237,6 +237,25 @@ public:
 			this->PushBackWithPower(arr[i], length - (i + 1));
 		}
 	}
+	void InsertNode(Node * InsertNodeAfterThisNode,int d) {
+		Node* n = new Node(d);
+		n->SetNext(InsertNodeAfterThisNode->GetNext());
+		InsertNodeAfterThisNode->SetNext(n);
+	}
+
+	void completes() {
+		Node* ptrtomove = this->Head;
+		while(ptrtomove->GetNext() != nullptr){
+			if((ptrtomove->GetData() +1) == ptrtomove->GetNext()->GetData()){
+				ptrtomove = ptrtomove->GetNext();
+				continue;
+			}
+			this->InsertNode(ptrtomove, ptrtomove->GetData() + 1);
+			ptrtomove = ptrtomove->GetNext();
+			
+		}
+
+	}
 
 	~LinkedList()
 	{
@@ -249,13 +268,16 @@ public:
 int main()
 
 {	
-	int arr[4] = { 4,2,0,-1 };
+	int arr[3] = { 2,5,7 };
 	LinkedList * L1 = new LinkedList;
-	L1->InitializeFromArr(arr, 4);
-	cout<<L1->GetIndex(0);
-	cout<<L1->GetIndex(1);
-	cout<<L1->GetIndex(2);
-	cout<<L1->GetIndex(3);
+	L1->InitializeFromArr(arr, 3);
+	L1->completes();
+	cout << L1->length() << endl;
+	for (int i = 0; i < L1->length(); i++) {
+
+	cout<<L1->GetIndex(i)<<endl;
+	}
+
 	
 
 
