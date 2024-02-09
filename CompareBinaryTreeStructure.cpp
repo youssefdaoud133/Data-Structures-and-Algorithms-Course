@@ -120,7 +120,7 @@ void mastercompare(node* Root, node* Root2) {
 
 int main()
 {
-	int arr[13] = { 1,12, 9, 5, 7, 10,9, 11, 18, 13, 16, 55, 100 };
+	int arr[14] = { 2,1,12, 9, 5, 7, 10,9, 11, 18, 13, 16, 55, 100 };
 	struct node* root = newNode(arr[0]);
 	for (int i = 1; i < 13; i++) {
 		InsertArrayToBinaryTree(arr[i], root);
