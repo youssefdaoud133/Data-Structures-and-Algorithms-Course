@@ -1,7 +1,20 @@
 #include <iostream>
 #include <list>
+#include <vector>
 #include <string>
 using namespace std;
+
+// Function to search if a number exists in the vector
+bool searchNumber(const std::vector<int>& vec, int num) {
+    for (int i = 0; i < vec.size(); ++i) {
+        if (vec[i] == num) {
+            return true; // Number found
+        }
+    }
+    return false; // Number not found
+}
+
+vector<int> vec;
 
 
 struct Country {
@@ -53,6 +66,28 @@ public:
         }
     }
 
+    string Get_Path(Country * CS , Country* CD) {
+        vec.push_back(CS->index);
+        string path = "";
+        if(CS->CountryName == CD->CountryName){
+            path += CS->CountryName;
+            return path;
+        }
+        for (auto it = this->ArrayOfCountries[CS->index]->Countries.begin(); it != this->ArrayOfCountries[CS->index]->Countries.end(); ++it) {
+            if(searchNumber(vec , (*it) ->index)){
+                continue;
+            }
+            string che = Get_Path((*it), CD);
+            if(che.length() > 0) {
+                path = CS->CountryName + " -> " + che;
+                break;
+            }
+        }
+        return path;
+
+
+    }
+
 };
 
 int main()
@@ -71,8 +106,9 @@ int main()
     Map.AddEdge(Egypt, Libya);
     Map.AddEdge(Sudan, Egypt);
     Map.AddEdge(Sudan, SouthAfrica);
-    Map.PrintAllMap();
+    //Map.PrintAllMap();
     //Map.test();
+    cout << Map.Get_Path(Tunisia, Italy);
 
 
    
