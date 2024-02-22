@@ -83,6 +83,7 @@ public:
                 break;
             }
         }
+
         return path;
 
 
@@ -93,22 +94,38 @@ public:
 int main()
 {
     Graph Map(6);
-    Country* Italy = new Country("Italy", 0);
-    Country* Egypt = new Country("Egypt", 1);
-    Country* Libya = new Country("Libya",2);
-    Country* Sudan = new Country("Sudan", 3);
-    Country* SouthAfrica = new Country("SouthAfrica", 4);
-    Country* Tunisia = new Country("Tunisia", 5);
+    Country* spain = new Country("spain", 0);
+    Country* france = new Country("france", 1);
+    Country* uk = new Country("uk", 12);
+    Country* germany = new Country("germany", 2);
+    Country* italy = new Country("italy", 3);
+    Country* poland = new Country("poland", 4);
+    Country* ukraine = new Country("ukraine", 5);
+    Country* romania = new Country("romania", 6);
+    Country* turkey = new Country("turkey", 7);
+    Country* russia = new Country("russia", 8);
+    Country* finland = new Country("finland", 9);
+    Country* sweden = new Country("sweden", 10);
+    Country* norway = new Country("norway", 11);
+   
 
-    Map.AddEdge(Italy, Egypt);
-    Map.AddEdge(Italy, Libya);
-    Map.AddEdge(Tunisia, Libya);
-    Map.AddEdge(Egypt, Libya);
-    Map.AddEdge(Sudan, Egypt);
-    Map.AddEdge(Sudan, SouthAfrica);
+    Map.AddEdge(spain, france);
+    Map.AddEdge(uk, france);
+    Map.AddEdge(italy, france);
+    Map.AddEdge(germany, france);
+    Map.AddEdge(germany, poland);
+    Map.AddEdge(romania, poland);
+    Map.AddEdge(romania, turkey);
+    Map.AddEdge(ukraine, poland);
+    Map.AddEdge(ukraine, russia);
+    Map.AddEdge(finland, russia);
+    Map.AddEdge(finland, sweden);
+    Map.AddEdge(norway, sweden);
+    Map.AddEdge(norway, uk);
+
     //Map.PrintAllMap();
     //Map.test();
-    cout << Map.Get_Path(Tunisia, Italy);
+    cout << Map.Get_Path(russia, italy);
 
 
    
